@@ -1,0 +1,266 @@
+/* --- CÀI ĐẶT CHUNG --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #0f1014; /* Màu nền tối giống RoPhim */
+  color: #e0e0e0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- HEADER --- */
+.header {
+  background-color: #1a1c22;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo i {
+  color: #f5c518;
+  font-size: 30px;
+} /* Màu vàng icon */
+
+/* Thanh tìm kiếm */
+.search-bar {
+  background: #2b2d35;
+  padding: 8px 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: 400px;
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  margin-left: 10px;
+  width: 100%;
+  outline: none;
+}
+
+.search-bar i {
+  color: #888;
+}
+
+/* Menu */
+.nav-menu a {
+  margin-left: 20px;
+  font-size: 15px;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+.nav-menu a:hover {
+  color: #fff;
+}
+
+.btn-vip {
+  background: #333;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+  position: relative;
+  padding: 60px 0;
+  /* Ảnh nền backdrop (Bạn thay link ảnh backdrop vào đây) */
+  background-image: url("https://image.tmdb.org/t/p/original/2ex2beZ4ssMeOduLD0ILzXKC66.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Lớp phủ màu tối lên backdrop để đọc được chữ */
+.backdrop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to right,
+    #0f1014 30%,
+    rgba(15, 16, 20, 0.8) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* Poster */
+.poster-box img {
+  width: 280px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Thông tin phim */
+.info-box {
+  flex: 1;
+  margin-top: 20px;
+}
+
+.movie-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.movie-subtitle {
+  font-size: 18px;
+  color: #f5c518; /* Màu vàng phụ đề */
+  margin-bottom: 20px;
+}
+
+/* Thẻ tags */
+.meta-tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.tag {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #444;
+}
+
+.tag.imdb {
+  background: #f5c518;
+  color: #000;
+  font-weight: bold;
+  border: none;
+}
+
+.genres a {
+  color: #aaa;
+  margin-right: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid transparent;
+}
+.genres a:hover {
+  border-color: #aaa;
+}
+
+.description {
+  margin: 20px 0;
+  line-height: 1.6;
+  color: #ccc;
+  max-width: 700px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Nút bấm */
+.action-buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 50px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Nút Xem Ngay (Vàng) */
+.btn-primary {
+  background: #f5c518; /* Màu vàng đặc trưng */
+  color: #000;
+  padding: 12px 35px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.btn-primary:hover {
+  background: #e0b10d;
+}
+
+/* Các nút phụ (Trong suốt) */
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  flex-direction: column; /* Icon trên chữ dưới */
+  font-size: 13px;
+  gap: 5px;
+}
+
+.btn-secondary i {
+  font-size: 20px;
+}
+
+.btn-secondary:hover {
+  color: #f5c518;
+}
+
+/* --- QUẢNG CÁO --- */
+.banner-ad {
+  margin-top: 30px;
+  text-align: center;
+}
+.ad-placeholder {
+  background: linear-gradient(90deg, #4b0082, #800080);
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+}
