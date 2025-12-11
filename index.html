@@ -3,25 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Thống Kê Phim - Full Chức Năng</title>
+    <title>Dashboard Admin - Vẽ Biểu Đồ Code</title>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-      /* --- CẤU HÌNH MÀU SẮC --- */
+      /* --- CẤU HÌNH MÀU SẮC (THEME) --- */
       :root {
-        --bg-body: #0f172a;
-        --bg-card: #1e293b;
-        --text-main: #f8fafc;
-        --text-sub: #94a3b8;
-        --accent: #6366f1;
-        --danger: #ef4444;
-        --success: #10b981;
-        --warning: #f59e0b;
-        --border: #334155;
+        --bg-body: #0f172a; /* Nền chính */
+        --bg-card: #1e293b; /* Nền khối */
+        --text-main: #f8fafc; /* Chữ trắng */
+        --text-sub: #94a3b8; /* Chữ xám */
+        --accent: #6366f1; /* Tím chủ đạo */
+        --danger: #ef4444; /* Đỏ */
+        --success: #10b981; /* Xanh lá */
+        --warning: #f59e0b; /* Cam */
+        --border: #334155; /* Màu viền */
       }
 
       * {
@@ -38,7 +40,7 @@
         min-height: 100vh;
       }
 
-      /* SIDEBAR */
+      /* --- SIDEBAR --- */
       .sidebar {
         width: 250px;
         background-color: var(--bg-card);
@@ -78,7 +80,7 @@
         text-align: center;
       }
 
-      /* MAIN CONTENT */
+      /* --- NỘI DUNG CHÍNH --- */
       .main-content {
         flex: 1;
         padding: 30px;
@@ -101,7 +103,7 @@
         cursor: pointer;
       }
 
-      /* CARDS */
+      /* --- CÁC THẺ CHỈ SỐ (CARDS) --- */
       .cards-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -139,10 +141,10 @@
         font-size: 22px;
       }
 
-      /* CHART AREA */
+      /* --- KHU VỰC BIỂU ĐỒ (VẼ BẰNG CANVAS) --- */
       .charts-wrapper {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 2fr 1fr; /* Trái 2 phần - Phải 1 phần */
         gap: 20px;
         margin-bottom: 30px;
       }
@@ -164,7 +166,7 @@
         justify-content: center;
       }
 
-      /* --- TABLE SECTION & FILTERS (MỚI) --- */
+      /* --- BẢNG DỮ LIỆU & BỘ LỌC --- */
       .table-container {
         background-color: var(--bg-card);
         padding: 24px;
@@ -172,7 +174,6 @@
         border: 1px solid var(--border);
       }
 
-      /* Thanh công cụ tìm kiếm & lọc */
       .table-toolbar {
         display: flex;
         justify-content: space-between;
@@ -186,6 +187,7 @@
         gap: 10px;
         flex: 1;
       }
+
       .search-box {
         position: relative;
         flex: 1;
@@ -195,13 +197,10 @@
         width: 100%;
         background: #0f172a;
         border: 1px solid var(--border);
-        padding: 10px 10px 10px 35px; /* Padding trái để chừa chỗ cho icon */
+        padding: 10px 10px 10px 35px;
         border-radius: 8px;
         color: white;
         outline: none;
-      }
-      .search-box input:focus {
-        border-color: var(--accent);
       }
       .search-box i {
         position: absolute;
@@ -222,9 +221,8 @@
         cursor: pointer;
       }
 
-      /* Bảng */
       .table-wrapper {
-        max-height: 400px; /* Giới hạn chiều cao để cuộn nếu quá dài */
+        max-height: 400px;
         overflow-y: auto;
       }
       table {
@@ -236,7 +234,7 @@
         position: sticky;
         top: 0;
         background: var(--bg-card);
-        z-index: 1; /* Cố định header khi cuộn */
+        z-index: 1;
         color: var(--text-sub);
         padding: 16px 12px;
         border-bottom: 1px solid var(--border);
@@ -250,7 +248,7 @@
       }
       tr:hover td {
         background-color: rgba(255, 255, 255, 0.03);
-      } /* Hiệu ứng hover dòng */
+      }
 
       .movie-info {
         display: flex;
@@ -262,8 +260,7 @@
         height: 40px;
         background-color: #475569;
         border-radius: 6px;
-        object-fit: cover;
-      }
+      } /* Ô màu thay cho ảnh thumb */
       .badge {
         padding: 4px 10px;
         border-radius: 20px;
@@ -289,13 +286,9 @@
         color: var(--text-sub);
         cursor: pointer;
         font-size: 16px;
-        transition: 0.2s;
-      }
-      .action-btn:hover {
-        color: white;
       }
 
-      /* Tùy chỉnh thanh cuộn (Scrollbar) cho đẹp */
+      /* Scrollbar đẹp */
       ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
@@ -307,9 +300,6 @@
         background: #334155;
         border-radius: 3px;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #475569;
-      }
     </style>
   </head>
   <body>
@@ -320,7 +310,6 @@
       </div>
       <div class="menu-item"><i class="fas fa-film"></i> Quản lý phim</div>
       <div class="menu-item"><i class="fas fa-users"></i> Người dùng</div>
-      <div class="menu-item"><i class="fas fa-cog"></i> Cài đặt</div>
     </div>
 
     <div class="main-content">
@@ -544,38 +533,6 @@
               <tr>
                 <td>
                   <div class="movie-info">
-                    <div class="movie-thumb" style="background: #06b6d4"></div>
-                    <b>Doraemon Stand By Me</b>
-                  </div>
-                </td>
-                <td>Hoạt hình</td>
-                <td>12,300</td>
-                <td><span class="badge badge-active">Đang chiếu</span></td>
-                <td style="text-align: right">
-                  <button class="action-btn">
-                    <i class="fas fa-ellipsis-v"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="movie-info">
-                    <div class="movie-thumb" style="background: #e11d48"></div>
-                    <b>The Nun II</b>
-                  </div>
-                </td>
-                <td>Kinh dị</td>
-                <td>9,800</td>
-                <td><span class="badge badge-pending">Chờ duyệt</span></td>
-                <td style="text-align: right">
-                  <button class="action-btn">
-                    <i class="fas fa-ellipsis-v"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="movie-info">
                     <div class="movie-thumb" style="background: #fbbf24"></div>
                     <b>Minions: The Rise of Gru</b>
                   </div>
@@ -607,10 +564,10 @@
     </div>
 
     <script>
-      // --- 1. BIỂU ĐỒ CỘT (Top 5 Phim) ---
+      // --- 1. VẼ BIỂU ĐỒ CỘT (TOP 5) ---
       const ctxTop = document.getElementById("topMoviesChart").getContext("2d");
       new Chart(ctxTop, {
-        type: "bar",
+        type: "bar", // Loại biểu đồ: Cột đứng
         data: {
           labels: [
             "Big Hero 6",
@@ -623,6 +580,7 @@
             {
               label: "Lượt xem",
               data: [45200, 38100, 32000, 28500, 40100],
+              // Màu sắc từng cột
               backgroundColor: [
                 "#6366f1",
                 "#3b82f6",
@@ -630,8 +588,8 @@
                 "#f59e0b",
                 "#fbbf24",
               ],
-              borderRadius: 6,
-              barPercentage: 0.6,
+              borderRadius: 6, // Bo góc đầu cột
+              barPercentage: 0.6, // Độ rộng cột
             },
           ],
         },
@@ -659,12 +617,12 @@
         },
       });
 
-      // --- 2. BIỂU ĐỒ TRÒN (Thể loại) ---
+      // --- 2. VẼ BIỂU ĐỒ TRÒN (THỂ LOẠI) ---
       const ctxPie = document
         .getElementById("categoryPieChart")
         .getContext("2d");
       new Chart(ctxPie, {
-        type: "doughnut",
+        type: "doughnut", // Loại: Bánh tiêu (Tròn rỗng)
         data: {
           labels: ["Hành động", "Hoạt hình", "Tình cảm", "Kinh dị"],
           datasets: [
@@ -696,22 +654,18 @@
         },
       });
 
-      // --- 3. CHỨC NĂNG TÌM KIẾM & LỌC (Javascript thuần) ---
+      // --- 3. CHỨC NĂNG LỌC & TÌM KIẾM ---
       function filterTable() {
-        // Lấy giá trị từ ô input và dropdown
         const searchInput = document
           .getElementById("searchInput")
           .value.toUpperCase();
         const genreSelect = document.getElementById("genreSelect").value;
-
-        // Lấy danh sách các dòng trong bảng
         const table = document.getElementById("movieTable");
         const tr = table.getElementsByTagName("tr");
-        let hasResult = false; // Biến kiểm tra xem có kết quả không
+        let hasResult = false;
 
-        // Duyệt qua từng dòng (bỏ qua dòng tiêu đề đầu tiên)
+        // Duyệt qua từng dòng (bỏ qua header)
         for (let i = 1; i < tr.length; i++) {
-          // Lấy cột Tên phim (cột 0) và Thể loại (cột 1)
           const tdName = tr[i].getElementsByTagName("td")[0];
           const tdGenre = tr[i].getElementsByTagName("td")[1];
 
@@ -719,30 +673,24 @@
             const txtName = tdName.textContent || tdName.innerText;
             const txtGenre = tdGenre.textContent || tdGenre.innerText;
 
-            // Kiểm tra điều kiện:
-            // 1. Tên phim chứa từ khóa tìm kiếm (indexOf > -1)
-            // 2. Thể loại trùng với dropdown HOẶC dropdown đang chọn 'All'
+            // Logic: Tên chứa từ khóa VÀ Thể loại trùng khớp (hoặc chọn All)
             const matchesSearch =
               txtName.toUpperCase().indexOf(searchInput) > -1;
             const matchesGenre =
               genreSelect === "All" || txtGenre === genreSelect;
 
             if (matchesSearch && matchesGenre) {
-              tr[i].style.display = ""; // Hiện dòng
+              tr[i].style.display = ""; // Hiện
               hasResult = true;
             } else {
-              tr[i].style.display = "none"; // Ẩn dòng
+              tr[i].style.display = "none"; // Ẩn
             }
           }
         }
-
-        // Hiển thị thông báo nếu không có kết quả
-        const noResultDiv = document.getElementById("noResult");
-        if (!hasResult) {
-          noResultDiv.style.display = "block";
-        } else {
-          noResultDiv.style.display = "none";
-        }
+        // Hiện thông báo nếu không tìm thấy
+        document.getElementById("noResult").style.display = hasResult
+          ? "none"
+          : "block";
       }
     </script>
   </body>
